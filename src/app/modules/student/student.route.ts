@@ -1,9 +1,13 @@
 import express from 'express'
-import { StudentController } from './student.controller'
+import { StudentControllers } from './student.controller'
 
  const router =express.Router()
 
  //will call controller function
- router.post('/create-student',StudentController.createStudent);
+ router.post('/create-student',StudentControllers.createStudent);
+ router.get('/',StudentControllers.getAllStudents);
+ 
+ 
+
 
  export const StudentRoutes =router;

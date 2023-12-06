@@ -1,4 +1,4 @@
-import { StudentService } from './student.service';
+import { StudentServices } from './student.service';
 import { Request, Response } from "express";
 
 const createStudent = async(req:Request,res:Response)=>{
@@ -8,10 +8,11 @@ const createStudent = async(req:Request,res:Response)=>{
 
 
         //will call service function to send this data
-        const result = await StudentService.createStudentIntoDB(studentData)
+        const result = await StudentServices.createStudentIntoDB(studentData)
 
         //send response
         res.status(200).json({
+            success:true,
             message:"Student is created successfully",
             data : result
         })
@@ -21,6 +22,21 @@ const createStudent = async(req:Request,res:Response)=>{
    }
 } 
 
-export const StudentController ={
-    createStudent,
+const getAllStudents =async(req:Request,res:Response)=>{
+   try{
+    const result = await StudentServices.getAllStudentsFromDB();
+    res.status(200).json({
+        success:true,
+        message:"Students are retrieved successfully",
+        data : result
+    })
+   }catch(err){
+    console.log(err)
+   }
+}
+
+
+
+export const StudentControllers ={
+    createStudent,getAllStudents,
 }
